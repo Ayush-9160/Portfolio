@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayush Gajera| Projects</title>
+    <link rel="stylesheet" href="./page/css/project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Wm7DLdD8ayee93uU48jGLGxg1jOeOkRcIKsnOYfBQVfLY5J6TwZcTCc+Gbd7JZqzBYKwxzAg2qHPqBqTpzypqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-double-up"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo">
+                <a href="#">Porj<span>ects.</span></a>
+            </div>
+            <ul class="menu">
+                <li><a href="index.html" class="menu-btn">Home</a></li>
+                <li><a href="index.html#about" class="menu-btn">About</a></li>
+                <li><a href="blog.html" class="menu-btn">Blog</a></li>
+                <li><a href="project.html" class="menu-btn">Projects</a></li>
+                <li><a href="index.html#contact" class="menu-btn">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="repos-list" class="repos-list">
+            <!-- Repositories will be loaded here -->
+        </div>
+    </div>
+
+    <footer>
+        <span>Created By <a href="https://www.linkedin.com/in/ayush-gajera/" target="_blank">Ayush Gajera</a> | <span class="far fa-copyright"></span> 2024 All rights reserved </span>
+    </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch("https://api.github.com/users/Ayush-9160/repos")
+            .then(response => response.json())
+            .then(data => {
+                const reposList = document.getElementById("repos-list");
+                data.forEach(repo => {
+                    const repoCard = document.createElement("div");
+                    repoCard.classList.add("repo-card");
+
+                    const title = document.createElement("div");
+                    title.classList.add("repo-title");
+                    title.textContent = repo.name;
+
+                    const description = document.createElement("div");
+                    description.classList.add("repo-description");
+                    description.textContent = repo.description || "No description provided.";
+
+                    const viewButton = document.createElement("div");
+                    viewButton.classList.add("view-on-github");
+                    const link = document.createElement("a");
+                    link.href = repo.html_url;
+                    link.textContent = "View on GitHub";
+                    link.target = "_blank";
+                    viewButton.appendChild(link);
+
+                    repoCard.appendChild(title);
+                    repoCard.appendChild(description);
+                    repoCard.appendChild(viewButton);
+
+                    reposList.appendChild(repoCard);
+                });
+            })
+            .catch(error => {
+                console.error("Error fetching repositories:", error);
+            });
+        });
+    </script>
+    
+    <script>
+        window.addEventListener('scroll', function() {
+          var navbar = document.querySelector('.navbar');
+          if (window.scrollY > 0) {
+            navbar.classList.add('sticky');
+          } else {
+            navbar.classList.remove('sticky');
+          }
+        });
+      </script>
+</body>
+</html>
