@@ -32,3 +32,4 @@ This portfolio website serves as a platform to showcase my projects, skills, and
 ## Usage
 
 1. Clone the repository to your local machine:
+https://github.com/Ayush-9160/Portfolio.git
